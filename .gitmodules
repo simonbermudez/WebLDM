@@ -1,0 +1,4 @@
+[submodule "PyLDM"]
+	path = PyLDM
+	url = https://github.com/gadorlhiac/PyLDM.git
+	branch = py37
