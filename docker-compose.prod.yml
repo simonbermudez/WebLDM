@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
+    platform: linux/amd64
     container_name: webldm-backend
     restart: unless-stopped
     environment:
@@ -14,6 +15,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    platform: linux/amd64
     container_name: webldm-frontend
     restart: unless-stopped
     depends_on:

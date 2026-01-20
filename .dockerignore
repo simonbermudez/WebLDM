@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+
+# Frontend node_modules (handled by frontend's own build)
+frontend/node_modules
+frontend/dist
+
+# Backend virtual env and cache
+backend/venv
+backend/__pycache__
+**/__pycache__
+**/*.pyc
+**/*.pyo
+
+# Environment files
+.env*
+**/.env*
+
+# IDE
+.vscode
+.idea
+
+# PyLDM submodule (not needed for deployment)
+PyLDM
