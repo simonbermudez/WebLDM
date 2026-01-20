@@ -171,4 +171,32 @@ export async function deleteSession(sessionId: string): Promise<void> {
   await api.delete(`/session/${sessionId}`);
 }
 
+// Demo data types
+export interface DemoFile {
+  id: string;
+  filename: string;
+  name: string;
+  description: string;
+}
+
+export interface DemoListResponse {
+  demos: DemoFile[];
+}
+
+export interface DemoLoadResponse extends UploadResponse {
+  name: string;
+}
+
+// Get list of demo files
+export async function getDemoFiles(): Promise<DemoListResponse> {
+  const response = await api.get<DemoListResponse>('/demos');
+  return response.data;
+}
+
+// Load a demo file
+export async function loadDemoFile(demoId: string): Promise<DemoLoadResponse> {
+  const response = await api.post<DemoLoadResponse>(`/demos/${demoId}/load`);
+  return response.data;
+}
+
 export default api;

@@ -388,6 +388,69 @@ button:disabled {
   flex-direction: column;
 }
 
+/* Demo Selector */
+.demo-selector {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.demo-selector h3 {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.demo-selector.loading {
+  color: #666;
+  font-style: italic;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.demo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.demo-card:hover:not(:disabled) {
+  border-color: var(--secondary-color);
+  background-color: #f0f7ff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.demo-card:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.demo-name {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.demo-description {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: normal;
+}
+
 /* Footer */
 .app-footer {
   text-align: center;

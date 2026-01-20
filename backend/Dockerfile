@@ -14,6 +14,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY app/ ./app/
 
+# Create example_data directory (will be mounted via docker-compose)
+RUN mkdir -p ./example_data
+
 # Expose port
 EXPOSE 8000
 

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { FileUpload, DataPlot, SVDPanel, GAPanel, LDAPanel } from './components';
+import { FileUpload, DataPlot, SVDPanel, GAPanel, LDAPanel, DemoSelector } from './components';
 import {
   uploadData,
   getSVD,
@@ -150,6 +150,23 @@ function App() {
               in the first column.
             </p>
             <FileUpload onUpload={handleUpload} isLoading={isLoading} />
+            
+            <DemoSelector
+              onDemoLoaded={(response) => {
+                setSession({
+                  sessionId: response.session_id,
+                  filename: response.filename,
+                  dataInfo: response.info,
+                  rawData: response.raw_data,
+                });
+                setSvdData(null);
+                setGaResults(null);
+                setLdaResults(null);
+              }}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              setError={setError}
+            />
           </div>
         ) : (
           <>

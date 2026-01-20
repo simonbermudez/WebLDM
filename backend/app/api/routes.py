@@ -12,8 +12,28 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional, Tuple, Dict, Any
 import numpy as np
+import os
+from pathlib import Path
 
 from ..analysis import Data, LDA, SVD_GA
+
+
+# Demo files directory - check multiple possible locations
+def get_demo_data_dir():
+    """Find the example_data directory in various possible locations."""
+    possible_paths = [
+        Path("/app/example_data"),  # Docker container path
+        Path(__file__).parent.parent.parent / "example_data",  # backend/example_data
+        Path(__file__).parent.parent.parent.parent / "example_data",  # project root
+    ]
+    for path in possible_paths:
+        if path.exists():
+            return path
+    # Default to the Docker path even if it doesn't exist yet
+    return Path("/app/example_data")
+
+
+DEMO_DATA_DIR = get_demo_data_dir()
 
 router = APIRouter()
 
@@ -314,4 +334,89 @@ async def list_sessions():
             {"id": sid, "filename": s.get("filename", "unknown")}
             for sid, s in sessions.items()
         ]
+    }
+
+
+# Demo data endpoints
+
+DEMO_FILES = {
+    "fulldata": {
+        "filename": "fulldata.csv",
+        "name": "Full Data (Clean)",
+        "description": "Complete dataset without noise",
+    },
+    "fulldata_noise10": {
+        "filename": "fulldata_noise10.csv",
+        "name": "Full Data (10% Noise)",
+        "description": "Complete dataset with 10% noise",
+    },
+    "dynamic": {
+        "filename": "dynamic.csv",
+        "name": "Dynamic (Clean)",
+        "description": "Dynamic dataset without noise",
+    },
+    "dynamic_noise10": {
+        "filename": "dynamic_noise10.csv",
+        "name": "Dynamic (10% Noise)",
+        "description": "Dynamic dataset with 10% noise",
+    },
+    "hettaus": {
+        "filename": "hettaus.csv",
+        "name": "Heterogeneous Taus (Clean)",
+        "description": "Heterogeneous lifetime dataset without noise",
+    },
+    "hettaus_noise10": {
+        "filename": "hettaus_noise10.csv",
+        "name": "Heterogeneous Taus (10% Noise)",
+        "description": "Heterogeneous lifetime dataset with 10% noise",
+    },
+}
+
+
+@router.get("/demos")
+async def list_demo_files():
+    """List available demo datasets."""
+    return {"demos": [{"id": key, **value} for key, value in DEMO_FILES.items()]}
+
+
+@router.post("/demos/{demo_id}/load")
+async def load_demo_file(demo_id: str):
+    """Load a demo dataset."""
+    if demo_id not in DEMO_FILES:
+        raise HTTPException(status_code=404, detail=f"Demo '{demo_id}' not found")
+
+    demo_info = DEMO_FILES[demo_id]
+    file_path = DEMO_DATA_DIR / demo_info["filename"]
+
+    if not file_path.exists():
+        raise HTTPException(
+            status_code=404, detail=f"Demo file not found: {demo_info['filename']}"
+        )
+
+    try:
+        with open(file_path, "r") as f:
+            content_str = f.read()
+        data = Data(content_str)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Error loading demo: {str(e)}")
+
+    # Generate session ID
+    import uuid
+
+    session_id = str(uuid.uuid4())
+
+    # Store in session
+    sessions[session_id] = {
+        "data": data,
+        "lda": None,
+        "svd_ga": None,
+        "filename": demo_info["filename"],
+    }
+
+    return {
+        "session_id": session_id,
+        "filename": demo_info["filename"],
+        "name": demo_info["name"],
+        "info": data.get_info(),
+        "raw_data": data.get_raw_data_plot(),
     }
