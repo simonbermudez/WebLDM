@@ -1,16 +1,14 @@
 services:
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: webldm-backend
     restart: unless-stopped
     expose:
       - "8000"
     environment:
       - PYTHONUNBUFFERED=1
-    volumes:
-      - ./example_data:/app/example_data:ro
 
   frontend:
     build:

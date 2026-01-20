@@ -8,14 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY app/ ./app/
+COPY backend/app/ ./app/
 
-# Create example_data directory (will be mounted via docker-compose)
-RUN mkdir -p ./example_data
+# Copy example data into the image
+COPY example_data/ ./example_data/
 
 # Expose port
 EXPOSE 8000

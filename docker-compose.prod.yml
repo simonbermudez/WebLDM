@@ -1,14 +1,12 @@
 services:
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: webldm-backend
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
-    volumes:
-      - ./example_data:/app/example_data:ro
     networks:
       - webldm-network
 
