@@ -9,6 +9,8 @@ services:
       - PYTHONUNBUFFERED=1
     volumes:
       - ./example_data:/app/example_data:ro
+    networks:
+      - webldm-network
 
   frontend:
     build:
@@ -18,3 +20,9 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
+    networks:
+      - webldm-network
+
+networks:
+  webldm-network:
+    driver: bridge
