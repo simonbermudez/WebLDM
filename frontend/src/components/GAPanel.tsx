@@ -169,10 +169,12 @@ export function GAPanel({ onRunGA, gaResults, isLoading }: GAPanelProps) {
                 title: { text: 'Decay Associated Spectra' },
                 xaxis: { title: { text: 'wLSV Index' } },
                 yaxis: { title: { text: 'Amplitude' } },
-                width: 400,
-                height: 350,
+                autosize: true,
                 margin: { l: 60, r: 30, t: 50, b: 50 },
               }}
+              style={{ width: '100%', maxWidth: '400px', height: '350px' }}
+              config={{ responsive: true }}
+              useResizeHandler={true}
             />
 
             <div className="fit-plot">
@@ -199,10 +201,12 @@ export function GAPanel({ onRunGA, gaResults, isLoading }: GAPanelProps) {
                   title: { text: `wLSV ${gaResults.wLSV_indices[selectedFitIdx]} Fit` },
                   xaxis: { title: { text: 'Time' }, type: 'log' },
                   yaxis: { title: { text: 'Amplitude' } },
-                  width: 500,
-                  height: 350,
+                  autosize: true,
                   margin: { l: 60, r: 30, t: 50, b: 50 },
                 }}
+                style={{ width: '100%', maxWidth: '500px', height: '350px' }}
+                config={{ responsive: true }}
+                useResizeHandler={true}
               />
               <div className="slider-container">
                 <label>wLSV: {gaResults.wLSV_indices[selectedFitIdx]}</label>

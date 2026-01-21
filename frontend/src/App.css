@@ -254,6 +254,11 @@ body {
   justify-content: center;
 }
 
+.plot-row > * {
+  min-width: 0;
+  flex-shrink: 1;
+}
+
 /* Sliders */
 .slider-container {
   margin-top: 1rem;
@@ -472,12 +477,61 @@ button:disabled {
 }
 
 @media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .app-header p {
+    font-size: 0.9rem;
+  }
+
   .app-main {
     padding: 1rem;
   }
 
+  .session-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .session-info span {
+    font-size: 0.9rem;
+  }
+
+  .session-info .new-session {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .tabs button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    flex: 1 1 auto;
+    min-width: calc(50% - 0.125rem);
+  }
+
+  .tab-content {
+    padding: 1rem;
+    min-height: 300px;
+    overflow-x: hidden;
+  }
+
   .data-tab {
     flex-direction: column;
+  }
+
+  .irf-controls {
+    width: 100%;
   }
 
   .control-row {
@@ -485,8 +539,162 @@ button:disabled {
     gap: 1rem;
   }
 
+  .range-inputs {
+    flex-wrap: wrap;
+  }
+
+  .range-inputs input {
+    width: 70px;
+  }
+
+  .tau-row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tau-row input {
+    width: calc(33% - 0.5rem);
+    min-width: 80px;
+  }
+
   .ldm-sliders {
     flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ldm-sliders .slider-container {
+    min-width: 100%;
+  }
+
+  .demo-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .upload-section {
+    padding: 0 0.5rem;
+  }
+
+  .file-upload {
+    padding: 2rem 1rem;
+  }
+
+  /* Responsive plot containers */
+  .plot-row {
+    width: 100%;
+    justify-content: center;
     align-items: center;
+  }
+
+  .plot-row > div,
+  .plot-row > * {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .fit-plot,
+  .wlsv-plot {
+    width: 100%;
+  }
+
+  .ldm-section {
+    width: 100%;
+  }
+
+  .ldm-section h4 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.75rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .app-header p {
+    font-size: 0.85rem;
+  }
+
+  .app-main {
+    padding: 0.75rem;
+  }
+
+  .tab-content {
+    padding: 0.75rem;
+  }
+
+  .tabs button {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .control-group label {
+    font-size: 0.9rem;
+  }
+
+  .control-group input,
+  .control-group select {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+
+  button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .tau-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tau-row span {
+    min-width: 100%;
+  }
+
+  .tau-row input {
+    width: 100%;
+  }
+
+  .range-inputs {
+    font-size: 0.85rem;
+  }
+
+  .range-inputs input {
+    width: 60px;
+  }
+
+  .ga-controls,
+  .lda-controls {
+    padding: 1rem;
+  }
+
+  .fitted-taus {
+    padding: 0.75rem;
+  }
+
+  .fitted-taus li {
+    font-size: 0.95rem;
+  }
+
+  .slider-container {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .upload-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .upload-section p {
+    font-size: 0.9rem;
+  }
+
+  .demo-selector h3 {
+    font-size: 1rem;
   }
 }

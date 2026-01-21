@@ -28,11 +28,12 @@ export function DataPlot({ data, title = 'Raw Data' }: DataPlotProps) {
         title: { text: title, font: { size: 16 } },
         xaxis: { title: { text: 'Wavelength (nm)' } },
         yaxis: { title: { text: 'Time' }, type: 'log' },
-        width: 600,
-        height: 500,
+        autosize: true,
         margin: { l: 60, r: 50, t: 50, b: 50 },
       }}
+      style={{ width: '100%', height: '500px' }}
       config={{ responsive: true }}
+      useResizeHandler={true}
     />
   );
 }

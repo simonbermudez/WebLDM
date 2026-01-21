@@ -182,11 +182,13 @@ export function LDAPanel({
                 title: { text: 'L-Curve' },
                 xaxis: { title: { text: 'Residual Norm' } },
                 yaxis: { title: { text: 'Smoothing Norm' } },
-                width: 350,
-                height: 300,
+                autosize: true,
                 margin: { l: 60, r: 30, t: 50, b: 50 },
                 showlegend: false,
               }}
+              style={{ width: '100%', maxWidth: '350px', height: '300px' }}
+              config={{ responsive: true }}
+              useResizeHandler={true}
             />
 
             <Plot
@@ -210,11 +212,13 @@ export function LDAPanel({
                 title: { text: 'Curvature' },
                 xaxis: { title: { text: 'Alpha' }, type: 'log' },
                 yaxis: { title: { text: 'Curvature' } },
-                width: 350,
-                height: 300,
+                autosize: true,
                 margin: { l: 60, r: 30, t: 50, b: 50 },
                 showlegend: false,
               }}
+              style={{ width: '100%', maxWidth: '350px', height: '300px' }}
+              config={{ responsive: true }}
+              useResizeHandler={true}
             />
 
             <Plot
@@ -252,10 +256,12 @@ export function LDAPanel({
                       side: 'right' as const,
                     }
                   : undefined,
-                width: 350,
-                height: 300,
+                autosize: true,
                 margin: { l: 60, r: 60, t: 50, b: 50 },
               }}
+              style={{ width: '100%', maxWidth: '350px', height: '300px' }}
+              config={{ responsive: true }}
+              useResizeHandler={true}
             />
           </div>
 
@@ -291,10 +297,12 @@ export function LDAPanel({
                 layout={{
                   xaxis: { title: { text: 'Wavelength (nm)' } },
                   yaxis: { title: { text: 'Lifetime (tau)' }, type: 'log' },
-                  width: 600,
-                  height: 450,
+                  autosize: true,
                   margin: { l: 60, r: 80, t: 30, b: 50 },
                 }}
+                style={{ width: '100%', maxWidth: '600px', height: '450px' }}
+                config={{ responsive: true }}
+                useResizeHandler={true}
               />
 
               <Plot
@@ -311,10 +319,12 @@ export function LDAPanel({
                   title: { text: `Wavelength = ${ldaResults.wavelengths[selectedWl].toFixed(1)} nm` },
                   xaxis: { title: { text: 'Lifetime (tau)' }, type: 'log' },
                   yaxis: { title: { text: 'Amplitude' } },
-                  width: 400,
-                  height: 450,
+                  autosize: true,
                   margin: { l: 60, r: 30, t: 50, b: 50 },
                 }}
+                style={{ width: '100%', maxWidth: '400px', height: '450px' }}
+                config={{ responsive: true }}
+                useResizeHandler={true}
               />
             </div>
 
